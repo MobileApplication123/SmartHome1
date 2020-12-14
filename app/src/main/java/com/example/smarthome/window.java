@@ -31,8 +31,6 @@ public class window extends AppCompatActivity implements AntaresHTTPAPI.OnRespon
     private String dataDevice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_window);
 
@@ -52,20 +50,23 @@ public class window extends AppCompatActivity implements AntaresHTTPAPI.OnRespon
         //antaresAPIHTTP = AntaresHTTPAPI.getInstance();
         antaresAPIHTTP = new AntaresHTTPAPI();
         antaresAPIHTTP.addListener(this);
+        antaresAPIHTTP.getLatestDataofDevice("c512e91e464f9119:2b31c59a19d78a99","androidantares","Windows");
 
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                antaresAPIHTTP.storeDataofDevice(1,"c512e91e464f9119:2b31c59a19d78a99", "androidantares", "Windows", "{\\\"status\\\":\\\"1\\\"}");
+                antaresAPIHTTP.storeDataofDevice(1,"c512e91e464f9119:2b31c59a19d78a99", "androidantares", "Windows", "{\\\"Status\\\":1}");
                 Toast.makeText(getApplicationContext(),"Window is Open",Toast.LENGTH_SHORT).show();
+                txtData.setText("Open");
             }
         });
 
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                antaresAPIHTTP.storeDataofDevice(1,"c512e91e464f9119:2b31c59a19d78a99", "androidantares", "Windows", "{\\\"status\\\":\\\"0\\\"}");
+                antaresAPIHTTP.storeDataofDevice(1,"c512e91e464f9119:2b31c59a19d78a99", "androidantares", "Windows", "{\\\"Status\\\":1}");
                 Toast.makeText(getApplicationContext(),"Window is Closed",Toast.LENGTH_SHORT).show();
+                txtData.setText("Closed");
             }
         });
     }
@@ -99,10 +100,15 @@ public class window extends AppCompatActivity implements AntaresHTTPAPI.OnRespon
             try {
                 JSONObject body = new JSONObject(antaresResponse.getBody());
                 dataDevice = body.getJSONObject("m2m:cin").getString("con");
+                String numberOnly = dataDevice.replaceAll("[^0-9]", "");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        txtData.setText(dataDevice);
+                        if (numberOnly.contains("0")){
+                            txtData.setText("Closed");
+                        } else if (numberOnly.contains("1")){
+                            txtData.setText("Open");
+                        }
                     }
                 });
                 Log.d(TAG,dataDevice);

@@ -35,6 +35,9 @@
         <activity
             android:name=".ac"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".fan"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

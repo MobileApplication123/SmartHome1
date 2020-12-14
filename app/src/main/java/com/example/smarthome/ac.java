@@ -50,21 +50,24 @@ public class ac extends AppCompatActivity implements AntaresHTTPAPI.OnResponseLi
         //antaresAPIHTTP = AntaresHTTPAPI.getInstance();
         antaresAPIHTTP = new AntaresHTTPAPI();
         antaresAPIHTTP.addListener(this);
+        antaresAPIHTTP.getLatestDataofDevice("c512e91e464f9119:2b31c59a19d78a99","androidantares","AirConditioner");
 
 
         btnOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                antaresAPIHTTP.storeDataofDevice(1,"c512e91e464f9119:2b31c59a19d78a99", "androidantares", "AirConditioner", "{\\\"status\\\":\\\"1\\\"}");
+                antaresAPIHTTP.storeDataofDevice(1,"c512e91e464f9119:2b31c59a19d78a99", "androidantares", "AirConditioner", "{\\\"Status\\\":1}");
                 Toast.makeText(getApplicationContext(),"AC is On",Toast.LENGTH_SHORT).show();
+                txtData.setText("On");
             }
         });
 
         btnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                antaresAPIHTTP.storeDataofDevice(1,"c512e91e464f9119:2b31c59a19d78a99", "androidantares", "AirConditioner", "{\\\"status\\\":\\\"0\\\"}");
+                antaresAPIHTTP.storeDataofDevice(1,"c512e91e464f9119:2b31c59a19d78a99", "androidantares", "AirConditioner", "{\\\"Status\\\":0}");
                 Toast.makeText(getApplicationContext(),"AC is Off",Toast.LENGTH_SHORT).show();
+                txtData.setText("Off");
             }
         });
     }
@@ -98,10 +101,15 @@ public class ac extends AppCompatActivity implements AntaresHTTPAPI.OnResponseLi
             try {
                 JSONObject body = new JSONObject(antaresResponse.getBody());
                 dataDevice = body.getJSONObject("m2m:cin").getString("con");
+                String numberOnly = dataDevice.replaceAll("[^0-9]", "");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        txtData.setText(dataDevice);
+                        if (numberOnly.contains("0")){
+                            txtData.setText("Off");
+                        } else if (numberOnly.contains("1")){
+                            txtData.setText("On");
+                        }
                     }
                 });
                 Log.d(TAG,dataDevice);
