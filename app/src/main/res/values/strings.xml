@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SmartHome</string>
+    <string name="afifah">Afifah</string>
+    <string name="ilmi">Ilmi</string>
+    <string name="luthfi">Luthfi</string>
+    <string name="gibran">Gibran</string>
+    <string name="developers">DEVELOPERS</string>
+    <string name="about">This is IoT mobile application. The users can turn on / off some devices by using this app</string>
+</resources>
