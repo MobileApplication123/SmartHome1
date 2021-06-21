@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="Date" type="id" />
+    <item name="health_trac" type="id" />
+    <item name="video" type="id" />
+    <item name="background_" type="id" />
+    <item name="latest_update" type="id" />
+    <item name="button" type="id" />
+    <item name="imageView2" type="id" />
+    <item name="imageView3" type="id" />
+    <item name="bottom_navb" type="id" />
+    <item name="kasus" type="id" />
+    <item name="Healed" type="id" />
+    <item name="Dead" type="id" />
+    <item name="totalCase" type="id" />
+    <item name="totalHealed" type="id" />
+    <item name="totalDeath" type="id" />
+    <item name="health5" type="id" />
+    <item name="gridLayout" type="id" />
+    <item name="hospitalNearby" type="id" />
+    <item name="checkSymptoms" type="id" />
+    <item name="tracker" type="id" />
+    <item name="checkThis" type="id" />
+    <item name="imageView4" type="id" />
+    <item name="setAddress" type="id" />
+    <item name="hi" type="id" />
+    <item name="checkLocation" type="id" />
+</resources>

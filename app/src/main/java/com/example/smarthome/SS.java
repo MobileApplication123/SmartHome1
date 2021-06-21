@@ -15,7 +15,7 @@ public class SS extends AppCompatActivity {
         setContentView(R.layout.activity_s);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        int time = 5000;
+        int time = 3000;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
